@@ -8,7 +8,7 @@
     "react-scripts": "1.1.4"
   },
   "scripts": {
-    "start": "webpack-dev-server --open --port 3006",
+    "start": "webpack-dev-server --open --port 3007",
     "build": "webpack",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
@@ -16,6 +16,10 @@
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.19",
     "html-webpack-plugin": "^3.2.0",
+    "react-redux": "^5.0.7",
+    "react-redux-form": "^1.16.9",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
