@@ -42,7 +42,15 @@ module.exports = {
                     'style-loader',
                     'css-loader'
                 ]
-            }
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [{ loader: 'url-loader?limit=15000&name=fonts/[hash].[ext]' }]
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                loader: "file-loader?name=assets/images/[name].[ext]"
+            },
         ]
     },
     optimization: {

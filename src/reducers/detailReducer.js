@@ -1,20 +1,28 @@
-import { UPDATE_BMI, UPDATE_BMR } from "../constants/actionTypes";
+import { UPDATE_BMI, UPDATE_BMR, UPDATE_TITLE } from "../constants/actionTypes";
 
-export const bmiReducer = (state = '', action) => {
+const initialState = {
+    BMI: '',
+    BMR: ''
+};
+
+export const calcDetailsReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case UPDATE_BMI:
-            return action.payload;
+            return { ...state, BMI: action.payload };
+
+        case UPDATE_BMR:
+            return { ...state, BMR: action.payload };
 
         default:
             return state;
     }
 };
 
-export const bmrReducer = (state = '', action) => {
+export const appTitleReducer = (state = 'Fitness Calculator Home', action) => {
     switch (action.type) {
 
-        case UPDATE_BMR:
+        case UPDATE_TITLE:
             return action.payload;
 
         default:
