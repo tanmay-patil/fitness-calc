@@ -7,7 +7,8 @@ import CardContent from '@material-ui/core/CardContent';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateAppTitle } from "../../actions/";
+import { updateAppTitle, updateBMIResult } from "../../actions/";
+import { actions } from 'react-redux-form';
 
 import { MaterialInputText, MaterialTextField, MaterialButton } from "../../materialComponents/";
 
@@ -19,7 +20,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateAppTitle: (title) => dispatch(updateAppTitle(title))
+        updateAppTitle: (title) => dispatch(updateAppTitle(title)),
+        updateBMIResult: (result) => dispatch(actions.change('Forms.bmiForm.result', result))
     };
 };
 
@@ -32,15 +34,37 @@ const styles = {
 class BMI extends Component {
 
     componentDidMount() {
-        this.props.updateAppTitle("BMI CalC");
+        this.props.updateAppTitle("BMI");
     }
 
     handleSubmit() {
-        calculateBMI();
+        this.calculateBMI();
+    }
+
+    attachDispatch(dispatch) {
+        this.formDispatch = dispatch;
+    }
+
+    updateResult(result) {
+        this.formDispatch(actions.change('Forms.bmiForm.result', result));
     }
 
     calculateBMI() {
         let result = 0;
+        let height = this.props.bmiForm.height;
+        height = height === '' ? 1 : height;
+
+        // Convert Height(cms) to Height(m)
+        height = height / 100;
+
+        let weight = this.props.bmiForm.weight;
+        weight = weight === '' ? 0 : weight;
+
+        result = weight / (height * height);
+
+        if (result !== 0) {
+            this.updateResult(result.toFixed(2))
+        }
 
     }
 
@@ -50,8 +74,8 @@ class BMI extends Component {
 
         const ResultCard = () => (<Card className={this.props.classes.resultCard}>
             <CardContent>
-                <Typography>
-                    Result
+                <Typography variant="headline">
+                    Result : {this.props.bmiForm.result}
                 </Typography>
             </CardContent>
         </Card>);
@@ -61,7 +85,7 @@ class BMI extends Component {
                 <Card className={this.props.classes.card}>
                     <CardContent>
                         <Typography variant="title" color="inherit">
-                            <Form model="Forms.bmiForm" onSubmit={this.handleSubmit}>
+                            <Form model="Forms.bmiForm" onSubmit={this.handleSubmit} getDispatch={(dispatch) => this.attachDispatch(dispatch)}>
 
                                 <Control
                                     model=".height"

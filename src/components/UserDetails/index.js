@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { updateAppTitle } from "../../actions/";
 
 import { MaterialInputText, MaterialTextField, MaterialButton } from "../../materialComponents/";
 
@@ -22,10 +23,20 @@ const mapStateToProps = (state) => {
     };
 };
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateAppTitle: (title) => dispatch(updateAppTitle(title))
+    };
+};
+
 class UserDetails extends Component {
 
     handleSubmit() {
         this.props.handleClose();
+    }
+
+    componentDidMount() {
+        this.props.updateAppTitle("My Profile");
     }
 
     render() {
@@ -69,7 +80,7 @@ class UserDetails extends Component {
 
 const _UserDetails = withStyles(styles)(UserDetails);
 
-export default connect(mapStateToProps, null)(_UserDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(_UserDetails);
 
 
 UserDetails.propTypes = {
