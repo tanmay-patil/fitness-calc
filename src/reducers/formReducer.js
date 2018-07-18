@@ -3,8 +3,8 @@ import {
 } from 'react-redux-form';
 
 const initialUserDetails = {
-    firstName: 'John',
-    lastName: 'Doe',
+    firstName: '',
+    lastName: '',
     age: '',
     gender: ''
 };
