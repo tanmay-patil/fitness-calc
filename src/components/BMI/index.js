@@ -87,7 +87,7 @@ class BMI extends Component {
                         <Typography variant="title" color="inherit">
                             <Form model="Forms.bmiForm" onSubmit={this.handleSubmit} getDispatch={(dispatch) => this.attachDispatch(dispatch)}>
 
-                                <div class="form-field">
+                                <div className="form-field">
                                     <Control
                                         model=".height"
                                         component={MaterialTextField}
@@ -99,7 +99,7 @@ class BMI extends Component {
                                     />
                                 </div>
 
-                                <div class="form-field">
+                                <div className="form-field">
                                     <Control
                                         model=".weight"
                                         component={MaterialTextField}

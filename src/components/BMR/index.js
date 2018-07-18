@@ -94,8 +94,47 @@ class BMR extends Component {
         this.formDispatch(actions.change('Forms.bmrForm.result', result));
     }
 
+    getFormStateValue(formState, key) {
+        let value = formState[key];
+        return value = value !== "" ? value : 0;
+    }
+
     calculateBMR() {
-        let result = 0;
+        let gender, age, height, weight, activityLevel, result = 0;
+
+        // Height in cms to inches
+        height = this.getFormStateValue(this.props.bmrForm, "height");
+        height /= 2.54;
+
+        // Weight in kgs to pounds
+        weight = this.getFormStateValue(this.props.bmrForm, "weight");
+        weight *= 2.2;
+
+        gender = this.getFormStateValue(this.props.bmrForm, "gender");
+        activityLevel = this.getFormStateValue(this.props.bmrForm, "activityLevel");
+        age = this.getFormStateValue(this.props.bmrForm, "age");
+        result = this.getFormStateValue(this.props.bmrForm, "result");
+
+        switch (gender) {
+            // Male
+            case 1:
+                result = 66 + (6.23 * weight) + (12.7 * height) - (6.8 * age);
+                break;
+
+            // Female
+            case 2:
+                result = 655 + (4.35 * weight) + (4.7 * height) - (4.7 * age);
+                break;
+
+
+            default:
+                break;
+        }
+        result *= activityLevel;
+
+        if (result !== 0) {
+            this.updateResult(result.toFixed());
+        }
     }
 
 
@@ -106,7 +145,7 @@ class BMR extends Component {
         const ResultCard = () => (<Card className={this.props.classes.resultCard}>
             <CardContent>
                 <Typography variant="headline">
-                    Result : {this.props.bmrForm.result}
+                    Result : {this.props.bmrForm.result} Kcals
                 </Typography>
             </CardContent>
         </Card>);
@@ -118,7 +157,7 @@ class BMR extends Component {
                         <Typography variant="title" color="inherit">
                             <Form model="Forms.bmrForm" onSubmit={this.handleSubmit} getDispatch={(dispatch) => this.attachDispatch(dispatch)}>
 
-                                <div class="form-field">
+                                <div className="form-field">
                                     <Control
                                         model=".gender"
                                         component={MaterialDropDown}
@@ -130,7 +169,7 @@ class BMR extends Component {
                                     />
                                 </div>
 
-                                <div class="form-field">
+                                <div className="form-field">
                                     <Control
                                         model=".age"
                                         component={MaterialTextField}
@@ -142,7 +181,7 @@ class BMR extends Component {
                                     />
                                 </div>
 
-                                <div class="form-field">
+                                <div className="form-field">
                                     <Control
                                         model=".height"
                                         component={MaterialTextField}
@@ -154,7 +193,7 @@ class BMR extends Component {
                                     />
                                 </div>
 
-                                <div class="form-field">
+                                <div className="form-field">
                                     <Control
                                         model=".weight"
                                         component={MaterialTextField}
@@ -166,7 +205,7 @@ class BMR extends Component {
                                     />
                                 </div>
 
-                                <div class="form-field">
+                                <div className="form-field">
                                     <Control
                                         model=".activityLevel"
                                         component={MaterialDropDown}

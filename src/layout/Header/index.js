@@ -30,9 +30,15 @@ class Header extends Component {
         };
     }
 
-    toggleDrawer(open) {
+    toggleLeftDrawer(open) {
         this.setState({
             left: open
+        });
+    };
+
+    toggleBottomDrawer(open) {
+        this.setState({
+            bottom: open
         });
     };
 
@@ -49,7 +55,7 @@ class Header extends Component {
             <div className="Header">
                 <AppBar position="static">
                     <Toolbar>
-                        <Typography onClick={this.toggleDrawer.bind(this, true)} variant="title" color="inherit">
+                        <Typography onClick={this.toggleLeftDrawer.bind(this, true)} variant="title" color="inherit">
                             <IconButton color="inherit" aria-label="Menu">
                                 <MenuIcon />
                             </IconButton>
@@ -61,17 +67,28 @@ class Header extends Component {
                 <SwipeableDrawer
                     anchor="left"
                     open={this.state.left}
-                    onClose={this.toggleDrawer.bind(this, false)}
-                    onOpen={this.toggleDrawer.bind(this, true)}
+                    onClose={this.toggleLeftDrawer.bind(this, false)}
+                    onOpen={this.toggleLeftDrawer.bind(this, true)}
                 >
                     <div
                         tabIndex={0}
                         role="button"
-                        onClick={this.toggleDrawer.bind(this, false)}
-                        onKeyDown={this.toggleDrawer.bind(this, false)}
+                        onClick={this.toggleLeftDrawer.bind(this, false)}
+                        onKeyDown={this.toggleLeftDrawer.bind(this, false)}
                     >
                         {sideList}
                     </div>
+                </SwipeableDrawer>
+
+                <SwipeableDrawer
+                    anchor="bottom"
+                    open={this.state.bottom}
+                    onClose={this.toggleBottomDrawer.bind(this, false)}
+                    onOpen={this.toggleBottomDrawer.bind(this, true)}
+                >
+                    <Typography variant="title" color="inherit">
+                        Created by : Tanmay Patil
+                        </Typography>
                 </SwipeableDrawer>
             </div>
         );
