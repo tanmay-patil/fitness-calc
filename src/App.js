@@ -6,6 +6,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Header from "./layout/Header/";
 import BMI from "./components/BMI/";
 import BMR from "./components/BMR/";
+import Home from "./components/Home/";
+import UserDetails from "./components/UserDetails/";
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
@@ -22,6 +24,8 @@ class App extends Component {
         <div className="App">
           <CssBaseline />
           <Header title={this.props.appTitle} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/UserDetails" component={UserDetails} />
           <Route exact path="/BMI" component={BMI} />
           <Route exact path="/BMR" component={BMR} />
         </div>

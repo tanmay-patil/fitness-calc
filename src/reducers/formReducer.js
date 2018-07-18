@@ -12,4 +12,4 @@ const initialUserDetails = {
 
 export const FormReducer = combineForms({
     basicUserForm: initialUserDetails
-}, 'form') 
+}, 'Forms') 
