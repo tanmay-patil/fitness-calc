@@ -25,7 +25,7 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { open: true }
+        this.state = { open: false }
     }
 
     handleClose() {

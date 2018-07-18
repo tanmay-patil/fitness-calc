@@ -15,7 +15,17 @@ const initialBMI = {
     result: ''
 };
 
+const initialBMR = {
+    weight: '',
+    height: '',
+    age: '',
+    gender: '',
+    activityLevel: '',
+    result: ''
+};
+
 export const FormReducer = combineForms({
     basicUserForm: initialUserDetails,
     bmiForm: initialBMI,
+    bmrForm: initialBMR,
 }, 'Forms') 

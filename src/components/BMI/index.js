@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateAppTitle, updateBMIResult } from "../../actions/";
+import { updateAppTitle } from "../../actions/";
 import { actions } from 'react-redux-form';
 
 import { MaterialInputText, MaterialTextField, MaterialButton } from "../../materialComponents/";
@@ -34,7 +34,7 @@ const styles = {
 class BMI extends Component {
 
     componentDidMount() {
-        this.props.updateAppTitle("BMI");
+        this.props.updateAppTitle("Body Mass Index (BMI)");
     }
 
     handleSubmit() {
@@ -87,25 +87,29 @@ class BMI extends Component {
                         <Typography variant="title" color="inherit">
                             <Form model="Forms.bmiForm" onSubmit={this.handleSubmit} getDispatch={(dispatch) => this.attachDispatch(dispatch)}>
 
-                                <Control
-                                    model=".height"
-                                    component={MaterialTextField}
-                                    label="Height"
-                                    id="height"
-                                    type="number"
-                                    adornment="cms"
-                                    val={this.props.bmiForm.height}
-                                />
+                                <div class="form-field">
+                                    <Control
+                                        model=".height"
+                                        component={MaterialTextField}
+                                        label="Height"
+                                        id="height"
+                                        type="number"
+                                        adornment="cms"
+                                        val={this.props.bmiForm.height}
+                                    />
+                                </div>
 
-                                <Control
-                                    model=".weight"
-                                    component={MaterialTextField}
-                                    label="Weight"
-                                    id="weight"
-                                    type="number"
-                                    adornment="kgs"
-                                    val={this.props.bmiForm.weight}
-                                />
+                                <div class="form-field">
+                                    <Control
+                                        model=".weight"
+                                        component={MaterialTextField}
+                                        label="Weight"
+                                        id="weight"
+                                        type="number"
+                                        adornment="kgs"
+                                        val={this.props.bmiForm.weight}
+                                    />
+                                </div>
 
                                 <div className="button-container" onClick={this.handleSubmit.bind(this)}>
                                     <MaterialButton text="Calculate" />
