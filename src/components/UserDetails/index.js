@@ -25,7 +25,7 @@ const mapStateToProps = (state) => {
 class UserDetails extends Component {
 
     handleSubmit() {
-        window.open('#/', '_self');
+        this.props.handleClose();
     }
 
     render() {
@@ -54,28 +54,8 @@ class UserDetails extends Component {
                                     val={this.props.basicUserForm.lastName}
                                 />
 
-                                <Control
-                                    model=".height"
-                                    component={MaterialTextField}
-                                    label="Height"
-                                    id="height"
-                                    type="number"
-                                    adornment="cms"
-                                    val={this.props.basicUserForm.height}
-                                />
-
-                                <Control
-                                    model=".weight"
-                                    component={MaterialTextField}
-                                    label="Weight"
-                                    id="weight"
-                                    type="number"
-                                    adornment="kgs"
-                                    val={this.props.basicUserForm.weight}
-                                />
-
-                                <div className="button-container" onClick={this.handleSubmit.bind(this)}>
-                                    <MaterialButton text="Let's Go" />
+                                <div className="button-container">
+                                    <MaterialButton handleClick={this.handleSubmit.bind(this)} text="Let's Go" />
                                 </div>
                             </Form>
                         </Typography>
@@ -87,10 +67,17 @@ class UserDetails extends Component {
     }
 }
 
-UserDetails.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
 const _UserDetails = withStyles(styles)(UserDetails);
 
 export default connect(mapStateToProps, null)(_UserDetails);
+
+
+UserDetails.propTypes = {
+    classes: PropTypes.object.isRequired,
+    basicUserForm: PropTypes.shape({
+        firstName: PropTypes.string,
+        lastName: PropTypes.string,
+        height: PropTypes.string,
+        weight: PropTypes.string
+    }),
+};

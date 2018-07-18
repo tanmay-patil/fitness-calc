@@ -5,11 +5,17 @@ import {
 const initialUserDetails = {
     firstName: '',
     lastName: '',
+    age: '',
+    gender: ''
+};
+
+const initialBMI = {
     weight: '',
     height: '',
-    age: ''
+    result: ''
 };
 
 export const FormReducer = combineForms({
-    basicUserForm: initialUserDetails
+    basicUserForm: initialUserDetails,
+    bmiForm: initialBMI,
 }, 'Forms') 

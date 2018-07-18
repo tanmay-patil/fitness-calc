@@ -33,7 +33,7 @@ export const MaterialTextField = (props) => (
 );
 
 export const MaterialButton = (props) => (
-    <Button variant="contained" color="primary">
+    <Button onClick={props.handleClick} variant="contained" color="primary">
         {props.text}
     </Button>
 );

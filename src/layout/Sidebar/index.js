@@ -5,14 +5,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 
-import { connect } from 'react-redux';
-import { updateAppTitle } from "../../actions/";
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateAppTitle: (title) => dispatch(updateAppTitle(title))
-    };
-};
 
 class Sidebar extends Component {
 
@@ -57,4 +49,4 @@ class Sidebar extends Component {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Sidebar);
+export default Sidebar;
